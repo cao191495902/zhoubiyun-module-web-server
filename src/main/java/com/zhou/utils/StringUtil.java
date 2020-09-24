@@ -1,5 +1,7 @@
 package com.zhou.utils;
 
+import org.springframework.util.StringUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -89,6 +91,20 @@ public class StringUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String replacePhone(String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            return "";
+        }
+        try {
+            StringBuilder sb = new StringBuilder(phone);
+            sb = sb.replace(4,8,"****");
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

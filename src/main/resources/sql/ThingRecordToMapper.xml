@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhou.dao.ThingRecordToMapper" >
+  <resultMap id="BaseResultMap" type="com.zhou.bean.ThingRecordTo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="man_user_id" property="manUserId" jdbcType="INTEGER" />
+    <result column="woman_user_id" property="womanUserId" jdbcType="INTEGER" />
+    <result column="happed_time" property="happedTime" jdbcType="TIMESTAMP" />
+    <result column="happed_place" property="happedPlace" jdbcType="VARCHAR" />
+    <result column="intro_des" property="introDes" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="img" property="img"/>
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, man_user_id, woman_user_id, happed_time, happed_place, intro_des, type, summary, img,
+    created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from thing_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from thing_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhou.bean.ThingRecordTo" >
+    insert into thing_record (id, man_user_id, woman_user_id, 
+      happed_time, happed_place, intro_des, 
+      type, summary, created_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{manUserId,jdbcType=INTEGER}, #{womanUserId,jdbcType=INTEGER}, 
+      #{happedTime,jdbcType=TIMESTAMP}, #{happedPlace,jdbcType=VARCHAR}, #{introDes,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{summary,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhou.bean.ThingRecordTo" >
+    insert into thing_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="manUserId != null" >
+        man_user_id,
+      </if>
+      <if test="womanUserId != null" >
+        woman_user_id,
+      </if>
+      <if test="happedTime != null" >
+        happed_time,
+      </if>
+      <if test="happedPlace != null" >
+        happed_place,
+      </if>
+      <if test="introDes != null" >
+        intro_des,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="manUserId != null" >
+        #{manUserId,jdbcType=INTEGER},
+      </if>
+      <if test="womanUserId != null" >
+        #{womanUserId,jdbcType=INTEGER},
+      </if>
+      <if test="happedTime != null" >
+        #{happedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="happedPlace != null" >
+        #{happedPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="introDes != null" >
+        #{introDes,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhou.bean.ThingRecordTo" >
+    update thing_record
+    <set >
+      <if test="manUserId != null" >
+        man_user_id = #{manUserId,jdbcType=INTEGER},
+      </if>
+      <if test="womanUserId != null" >
+        woman_user_id = #{womanUserId,jdbcType=INTEGER},
+      </if>
+      <if test="happedTime != null" >
+        happed_time = #{happedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="happedPlace != null" >
+        happed_place = #{happedPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="introDes != null" >
+        intro_des = #{introDes,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhou.bean.ThingRecordTo" >
+    update thing_record
+    set man_user_id = #{manUserId,jdbcType=INTEGER},
+      woman_user_id = #{womanUserId,jdbcType=INTEGER},
+      happed_time = #{happedTime,jdbcType=TIMESTAMP},
+      happed_place = #{happedPlace,jdbcType=VARCHAR},
+      intro_des = #{introDes,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      summary = #{summary,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getRecordListById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from thing_record
+        where man_user_id = #{id} or woman_user_id = #{id}
+        order by happed_time desc
+    </select>
+</mapper>

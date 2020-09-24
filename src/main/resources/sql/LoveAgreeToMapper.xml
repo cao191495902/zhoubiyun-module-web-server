@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhou.dao.LoveAgreeToMapper" >
+  <resultMap id="BaseResultMap" type="com.zhou.bean.LoveAgreeTo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="man_user_id" property="manUserId" jdbcType="INTEGER" />
+    <result column="woman_user_id" property="womanUserId" jdbcType="INTEGER" />
+    <result column="agree_intro" property="agreeIntro" jdbcType="VARCHAR" />
+    <result column="punish" property="punish" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, man_user_id, woman_user_id, agree_intro, punish, created_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from love_agree
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from love_agree
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhou.bean.LoveAgreeTo" >
+    insert into love_agree (id, man_user_id, woman_user_id, 
+      agree_intro, punish, created_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{manUserId,jdbcType=INTEGER}, #{womanUserId,jdbcType=INTEGER}, 
+      #{agreeIntro,jdbcType=VARCHAR}, #{punish,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhou.bean.LoveAgreeTo" >
+    insert into love_agree
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="manUserId != null" >
+        man_user_id,
+      </if>
+      <if test="womanUserId != null" >
+        woman_user_id,
+      </if>
+      <if test="agreeIntro != null" >
+        agree_intro,
+      </if>
+      <if test="punish != null" >
+        punish,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="manUserId != null" >
+        #{manUserId,jdbcType=INTEGER},
+      </if>
+      <if test="womanUserId != null" >
+        #{womanUserId,jdbcType=INTEGER},
+      </if>
+      <if test="agreeIntro != null" >
+        #{agreeIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="punish != null" >
+        #{punish,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhou.bean.LoveAgreeTo" >
+    update love_agree
+    <set >
+      <if test="manUserId != null" >
+        man_user_id = #{manUserId,jdbcType=INTEGER},
+      </if>
+      <if test="womanUserId != null" >
+        woman_user_id = #{womanUserId,jdbcType=INTEGER},
+      </if>
+      <if test="agreeIntro != null" >
+        agree_intro = #{agreeIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="punish != null" >
+        punish = #{punish,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhou.bean.LoveAgreeTo" >
+    update love_agree
+    set man_user_id = #{manUserId,jdbcType=INTEGER},
+      woman_user_id = #{womanUserId,jdbcType=INTEGER},
+      agree_intro = #{agreeIntro,jdbcType=VARCHAR},
+      punish = #{punish,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getAgreeListById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from love_agree
+        where man_user_id = #{id} or woman_user_id = #{id}
+        order by id
+    </select>
+</mapper>

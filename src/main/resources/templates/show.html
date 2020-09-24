@@ -3,13 +3,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>主页</title>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" /><!--CSS RESET-->
-    <link rel="stylesheet" type="text/css" href="../css/login.css" />
+    <link rel="stylesheet" type="text/css" href="dear/css/bootstrap/css/bootstrap.css" /><!--CSS RESET-->
+    <link rel="stylesheet" type="text/css" href="dear/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="dear/css/blog.css" />
 
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.classycountdown.css" />
 
-    <script src="../js/jquery-1.8.0.min.js"></script>
+    <script src="dear/js/jquery-1.8.0.min.js"></script>
     <script src="js/jquery.knob.js"></script>
     <script src="js/jquery.throttle.js"></script>
     <script src="js/jquery.classycountdown.js"></script>
@@ -18,15 +19,15 @@
 
     body{
         overflow:hidden;
+
     }
-    div.background{
+    div.brankgrond{
         position:absolute;
         width:100%;
         height:100%;
-        background-image:url('../img/4.jpg');
+        background-image:url('dear/img/5.jpg');
         background-repeat:no-repeat;
         background-size:100% 100%;
-
     }
 </style>
 <style>
@@ -42,9 +43,30 @@
     #countdown10 { background:#3498db }
 </style>
 <body>
-<div class="background">
-    <span>距C&Z相恋还有：</span>
-    <div id="countdown11" class="ClassyCountdownDemo" style="padding-top: 10px"></div>
+<div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+            <a class="blog-nav-item active" href="show">主页</a>
+            <a class="blog-nav-item " href="xiaozhan">战哥</a>
+            <a class="blog-nav-item " href="agree-index">协议</a>
+            <a class="blog-nav-item" href="thing-record">点滴</a>
+            <a class="blog-nav-item " href="intro">关于</a>
+        </nav>
+    </div>
+</div>
+<div class="brankgrond">
+<div class="container">
+    <div class="blog-header">
+        <h3 class="blog-title" style="text-align: left;color: white">爱了多久：</h3>
+    </div>
+    <div class="row" style="margin-top: -50px">
+        <div class="col-sm-8 blog-main">
+            <div class="blog-post">
+                <div id="countdown11" class="ClassyCountdownDemo"></div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 <script type="text/javascript">
@@ -86,7 +108,7 @@
             end: $.now() + 10000
         });
         $('#countdown11').ClassyCountdown({
-            theme: "black",
+            theme: "white",
             style: {
                 secondsElement: {
                     gauge: {
@@ -94,8 +116,9 @@
                     }
                 }
             },
-            end: '1589472000',
-            now: $.now()/1000
+            end: $.now()/1000,
+//            now: '1589040000'
+            now: '1589472000'
 
         });
         $('#countdown12').ClassyCountdown({
